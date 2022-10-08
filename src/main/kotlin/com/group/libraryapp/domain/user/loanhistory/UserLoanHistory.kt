@@ -1,5 +1,6 @@
 package com.group.libraryapp.domain.user.loanhistory
 
+import com.fasterxml.jackson.databind.util.ArrayBuilders.BooleanBuilder
 import com.group.libraryapp.domain.user.User
 import javax.persistence.*
 
@@ -16,6 +17,9 @@ class UserLoanHistory(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 ){
+
+    val isReturn: Boolean
+        get() = this.status == UserLoanStatus.RETURNED
 
     fun doReturn() {
         this.status = UserLoanStatus.RETURNED
